@@ -1,13 +1,16 @@
 ---
 import NestedList from "./NestedList.astro";
-import { NestedListProps } from "./NestedList.astro";
+import { MenuItem } from "./NestedList.astro";
 
-interface Props extends NestedListProps {}
-const { items, mainUlClass, childUlClass } = Astro.props;
+interface Props {
+    title: string;
+    items: Array<MenuItem>;
+}
+const { title, items } = Astro.props;
 ---
 
 <div class="navbar bg-base-100">
-    <div class="navbar-start">
+    <div class="navbar-start lg:w-auto">
         <div class="dropdown">
             <label tabindex="0" class="btn btn-ghost lg:hidden">
                 <svg
@@ -25,38 +28,23 @@ const { items, mainUlClass, childUlClass } = Astro.props;
             </label>
             <NestedList
                 items={items}
-                mainUlClass={mainUlClass}
-                childUlClass={childUlClass}
+                mainUlClass="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                childUlClass="p-2 menu-compact bg-base-100 rounded-box"
+                dropdown={true}
             />
         </div>
-        <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+        <a class="btn btn-ghost normal-case text-xl">{title}</a>
     </div>
-    <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal px-1">
-            <li><a>Item 1</a></li>
-            <li tabindex="0">
-                <a>
-                    Parent
-                    <svg
-                        class="fill-current"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        ><path
-                            d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
-                        ></path></svg
-                    >
-                </a>
-                <ul class="p-2">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                </ul>
-            </li>
-            <li><a>Item 3</a></li>
-        </ul>
+    <div class="navbar-center hidden lg:flex lg:justify-start">
+        <div class="divider divider-horizontal hidden lg:flex"></div>
+        <NestedList
+            items={items}
+            mainUlClass="menu menu-horizontal px-1"
+            childUlClass="p-2 menu-compact bg-base-100 rounded-box"
+            dropdown={false}
+        />
     </div>
     <div class="navbar-end">
-        <a class="btn">Get started</a>
+        <!-- Reserved -->
     </div>
 </div>
