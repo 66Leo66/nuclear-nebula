@@ -1,0 +1,53 @@
+---
+type MenuItem = {
+    text: string;
+    href?: string;
+    disabled?: boolean;
+    children?: Array<MenuItem>;
+};
+interface Props {
+    items: Array<MenuItem>;
+    mainUlClass: string;
+    childUlClass: string;
+}
+const { items, mainUlClass, childUlClass } = Astro.props;
+export type { MenuItem, Props as NestedListProps };
+---
+
+<ul tabindex="0" class={mainUlClass}>
+    {
+        items.map((item) => {
+            if (!item.children) {
+                return (
+                    <li>
+                        <a href={item.href || "#"}>{item.text}</a>
+                    </li>
+                );
+            } else {
+                return (
+                    <>
+                        <li tabindex="0">
+                            <a class="justify-between">
+                                {item.text}
+                                <svg
+                                    class="fill-current"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                                </svg>
+                            </a>
+                            <Astro.self
+                                items={item.children}
+                                mainUlClass={childUlClass}
+                                childUlClass={childUlClass}
+                            />
+                        </li>
+                    </>
+                );
+            }
+        })
+    }
+</ul>
