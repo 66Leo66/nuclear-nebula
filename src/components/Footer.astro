@@ -1,13 +1,21 @@
 ---
+import { Icon } from "astro-icon";
 const today = new Date();
 ---
 
-<footer>
-	&copy; {today.getFullYear()} YOUR NAME HERE. All rights reserved.
+<!-- today.getFullYear -->
+<footer class="footer p-10 bg-neutral text-neutral-content">
+	<div>
+		<Icon pack="mdi" name="hexagon-slice-6" class="h-14 w-14" />
+		<p>Leo Li (66Leo66)</p>
+		<p>{today.getFullYear()} - Some Rights Reserved.</p>
+	</div>
+	<div>
+		<span class="footer-title">SOCIAL</span>
+		<div class="grid grid-flow-col gap-4">
+			<a><Icon pack="mdi" name="github" class="h-8 w-8" /></a>
+			<a><Icon pack="fluent" name="mail-28-filled" class="h-8 w-8" /></a>
+			<a><Icon pack="ic" name="baseline-telegram" class="h-8 w-8" /></a>
+		</div>
+	</div>
 </footer>
-<style>
-	footer {
-		padding: 25px;
-		text-align: center;
-	}
-</style>

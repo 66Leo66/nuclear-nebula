@@ -1,7 +1,7 @@
 ---
 import NestedList from "./NestedList.astro";
 import { MenuItem } from "./NestedList.astro";
-
+import { Icon } from "astro-icon";
 interface Props {
     title: string;
     items: Array<MenuItem>;
@@ -13,18 +13,11 @@ const { title, items } = Astro.props;
     <div class="navbar-start lg:w-auto">
         <div class="dropdown">
             <label tabindex="0" class="btn btn-ghost lg:hidden">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
+                <Icon
+                    pack="heroicons-solid"
+                    name="menu-alt-1"
                     class="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    ><path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 6h16M4 12h8m-8 6h16"></path></svg
-                >
+                />
             </label>
             <NestedList
                 items={items}
